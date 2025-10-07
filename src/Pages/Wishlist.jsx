@@ -3,19 +3,55 @@ import WishlistCard from "../Components/WishlistCard";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
+  const [sortOrder, setSortOrder] = useState("none");
+  // console.log(sortOrder, wishlist);
 
   useEffect(() => {
     const savedList = JSON.parse(localStorage.getItem("wishlist"));
     setWishlist(savedList);
   }, []);
 
+  const sortedItem = (() => {
+    if (sortOrder === "price-asc") {
+      return [...wishlist].sort((a, b) => a.price - b.price);
+    } else if (sortOrder === "price-desc") {
+      return [...wishlist].sort((a, b) => b.price - a.price);
+    } else {
+      return wishlist;
+    }
+  })();
+
+  console.log(wishlist);
+
   return (
-    <div className="flex items-center flex-col space-y-5">
-      <h3 className="text-2xl font-semibold">Wish List ({wishlist.length})</h3>
-      <div className="space-y-5">
-        {wishlist
-          ? wishlist.map((list) => (
-              <WishlistCard key={list.id} list={list} wishlist={wishlist} setWishlist={setWishlist}></WishlistCard>
+    <div className="space-y-5">
+      <div className="flex items-center justify-around gap-15 md:gap-0">
+        <h3 className="text-2xl font-semibold">
+          Wish List{" "}
+          <span className="text-xs text-gray-400">
+            ({wishlist.length}) Products Found
+          </span>
+        </h3>
+        <select
+          onClick={sortedItem}
+          onChange={(e) => setSortOrder(e.target.value)}
+          defaultValue="Pick a color"
+          className="select w-35 md:w-60"
+        >
+          <option value={"none"}>Sort by price</option>
+          <option value={"price-asc"}>low &gt; high</option>
+          <option value={"price-desc"}>high &gt; low</option>
+        </select>
+      </div>
+      <div className=" flex flex-col justify-center items-center space-y-5">
+        {sortedItem
+          ? sortedItem.map((list) => (
+              <WishlistCard
+                key={list.id}
+                list={list}
+                wishlist={wishlist}
+                setWishlist={setWishlist}
+              ></WishlistCard>
             ))
           : ""}
       </div>

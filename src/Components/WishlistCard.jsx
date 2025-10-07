@@ -10,8 +10,8 @@ const WishlistCard = ({ list, wishlist, setWishlist }) => {
 
   return (
     <div>
-      <ul className="list bg-base-100 rounded-box shadow-md md:w-100 lg:w-150">
-        <li className="list-row">
+      <ul className="list bg-base-100 rounded-box shadow-md ">
+        <li className="list-row w-90 md:w-100 lg:w-150">
           <div>
             <img className="size-10 rounded-box" src={image} />
           </div>
