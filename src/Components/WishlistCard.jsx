@@ -1,11 +1,15 @@
-const WishlistCard = ({ list, wishlist, setWishlist }) => {
+const WishlistCard = ({ list, setWishlist }) => {
   const { image, name, price } = list;
 
   const handleRemove = (currList) => {
-    const filtredList = wishlist.filter(
+    const existingWishList = JSON.parse(localStorage.getItem("wishlist"));
+
+    let updatedList = existingWishList.filter(
       (element) => element.id !== currList.id
     );
-    setWishlist(filtredList);
+
+    localStorage.setItem("wishlist", JSON.stringify(updatedList));
+    setWishlist(updatedList);
   };
 
   return (

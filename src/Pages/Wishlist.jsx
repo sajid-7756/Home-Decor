@@ -21,7 +21,7 @@ const Wishlist = () => {
     }
   })();
 
-  console.log(wishlist);
+  console.log(sortedItem);
 
   return (
     <div className="space-y-5">
@@ -33,7 +33,6 @@ const Wishlist = () => {
           </span>
         </h3>
         <select
-          onClick={sortedItem}
           onChange={(e) => setSortOrder(e.target.value)}
           defaultValue="Pick a color"
           className="select w-35 md:w-60"
@@ -44,12 +43,11 @@ const Wishlist = () => {
         </select>
       </div>
       <div className=" flex flex-col justify-center items-center space-y-5">
-        {sortedItem
+        {wishlist
           ? sortedItem.map((list) => (
               <WishlistCard
                 key={list.id}
                 list={list}
-                wishlist={wishlist}
                 setWishlist={setWishlist}
               ></WishlistCard>
             ))
