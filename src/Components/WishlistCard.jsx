@@ -1,5 +1,5 @@
 const WishlistCard = ({ list, setWishlist }) => {
-  const { image, name, price } = list;
+  const { image, name, price, category } = list;
 
   const handleRemove = (currList) => {
     const existingWishList = JSON.parse(localStorage.getItem("wishlist"));
@@ -21,16 +21,19 @@ const WishlistCard = ({ list, setWishlist }) => {
           </div>
           <div>
             <div>{name}</div>
-            <div className="text-xs uppercase font-semibold opacity-60">
-              Price: $ {price}
+            <div className="text-xs uppercase font-semibold opacity-60 flex gap-2">
+              <p>Category: {category}</p>
             </div>
           </div>
-          <button
-            onClick={() => handleRemove(list)}
-            className="btn btn-square btn-ghost"
-          >
-            X
-          </button>
+          <div className="flex items-center gap-1 md:gap-3">
+            <p>Price: $ {price}</p>
+            <button
+              onClick={() => handleRemove(list)}
+              className="btn btn-square btn-ghost bg-red-300"
+            >
+              X
+            </button>
+          </div>
         </li>
       </ul>
     </div>

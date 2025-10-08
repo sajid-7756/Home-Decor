@@ -41,6 +41,9 @@ const Navbar = () => {
                 <li>
                   <NavLink to={"/wishlist"}>Wishlist</NavLink>
                 </li>
+                <li>
+                  <NavLink to={"/chart"}>Chart</NavLink>
+                </li>
               </ul>
             </div>
             <Link to={"/"} className="cursor-pointer text-2xl font-bold">
@@ -58,6 +61,9 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink to={"/wishlist"}>Wishlist</NavLink>
+              </li>
+              <li>
+                <NavLink to={"/chart"}>Chart</NavLink>
               </li>
             </ul>
             <Link
