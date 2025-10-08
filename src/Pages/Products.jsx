@@ -1,18 +1,17 @@
 import useProducts from "../Hooks/useProducts";
 import FurnitureCard from "../Components/FurnitureCard";
 import { useState } from "react";
+import SkeletonLoader from "../Components/SkeletonLoader";
 
 const Products = () => {
-  const { products } = useProducts();
+  const { products, loading } = useProducts();
   const [search, setSearch] = useState("");
-
   const term = search.trim().toLowerCase();
-
+  
   const searchedProducts = term
-    ? products.filter((product) => product.name.toLowerCase().includes(term))
-    : products;
-
-  console.log({ search, term });
+  ? products.filter((product) => product.name.toLowerCase().includes(term))
+  : products;
+  
   return (
     <>
       <div className="text-center py-5 space-y-2">
@@ -31,11 +30,15 @@ const Products = () => {
           />
         </label>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {searchedProducts.map((data) => (
-          <FurnitureCard key={data.id} data={data}></FurnitureCard>
-        ))}
-      </div>
+      {loading ? (
+        <SkeletonLoader count={16}></SkeletonLoader>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {searchedProducts.map((data) => (
+            <FurnitureCard key={data.id} data={data}></FurnitureCard>
+          ))}
+        </div>
+      )}
     </>
   );
 };
