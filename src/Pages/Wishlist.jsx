@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import WishlistCard from "../Components/WishlistCard";
+import { getWishlist } from "../Utilities/localStorage";
 
 const Wishlist = () => {
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState(() => getWishlist());
   const [sortOrder, setSortOrder] = useState("none");
-  // console.log(sortOrder, wishlist);
-
-  useEffect(() => {
-    const savedList = JSON.parse(localStorage.getItem("wishlist"));
-    setWishlist(savedList);
-  }, []);
 
   const sortedItem = (() => {
     if (sortOrder === "price-asc") {
@@ -20,8 +15,6 @@ const Wishlist = () => {
       return wishlist;
     }
   })();
-
-  console.log(sortedItem);
 
   return (
     <div className="space-y-5">

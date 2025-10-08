@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import useProducts from "../Hooks/useProducts";
 import { DotLoader } from "react-spinners";
+import { setWishlist } from "../Utilities/localStorage";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -16,24 +17,24 @@ const ProductDetails = () => {
     ); // error prob fix
   const { name, description, category, image, price, stock } = product || {};
 
-  const handleAddToWishList = () => {
-    const existingWishList = JSON.parse(localStorage.getItem("wishlist"));
+  // const handleAddToWishList = () => {
+  //   const existingWishList = JSON.parse(localStorage.getItem("wishlist"));
 
-    let updatedList = [];
-    if (existingWishList) {
-      const isDuplicate = existingWishList.some(
-        (element) => element.id === product.id
-      );
-      if (isDuplicate) return alert("No isDuplicates");
+  //   let updatedList = [];
+  //   if (existingWishList) {
+  //     const isDuplicate = existingWishList.some(
+  //       (element) => element.id === product.id
+  //     );
+  //     if (isDuplicate) return alert("No isDuplicates");
 
-      updatedList = [...existingWishList, product];
-    } else {
-      updatedList.push(product);
-    }
-    console.log(updatedList);
+  //     updatedList = [...existingWishList, product];
+  //   } else {
+  //     updatedList.push(product);
+  //   }
+  //   console.log(updatedList);
 
-    localStorage.setItem("wishlist", JSON.stringify(updatedList));
-  };
+  //   localStorage.setItem("wishlist", JSON.stringify(updatedList));
+  // };
 
   return (
     <>
@@ -57,7 +58,10 @@ const ProductDetails = () => {
             Price: <span className="font-semibold">{price} ৳</span>
           </p>
           <div className="card-actions justify-end">
-            <button onClick={handleAddToWishList} className="btn btn-primary">
+            <button
+              onClick={() => setWishlist(product)}
+              className="btn btn-primary"
+            >
               Add to Wishlist
             </button>
           </div>

@@ -1,15 +1,12 @@
+import { removeWishlist } from "../Utilities/localStorage";
+
 const WishlistCard = ({ list, setWishlist }) => {
   const { image, name, price, category } = list;
 
   const handleRemove = (currList) => {
-    const existingWishList = JSON.parse(localStorage.getItem("wishlist"));
+    removeWishlist(currList);
 
-    let updatedList = existingWishList.filter(
-      (element) => element.id !== currList.id
-    );
-
-    localStorage.setItem("wishlist", JSON.stringify(updatedList));
-    setWishlist(updatedList);
+    setWishlist((prev) => prev.filter((p) => p.id !== currList.id));
   };
 
   return (
