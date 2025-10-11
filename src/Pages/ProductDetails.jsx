@@ -1,8 +1,6 @@
 import { useParams } from "react-router";
 import useProducts from "../Hooks/useProducts";
-import { DotLoader } from "react-spinners";
 import { setWishlist } from "../Utilities/localStorage";
-import SkeletonLoader from "../Components/SkeletonLoader";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -11,25 +9,6 @@ const ProductDetails = () => {
   const product = products.find((product) => product.id === parseInt(id));
 
   const { name, description, category, image, price, stock } = product || {};
-
-  // const handleAddToWishList = () => {
-  //   const existingWishList = JSON.parse(localStorage.getItem("wishlist"));
-
-  //   let updatedList = [];
-  //   if (existingWishList) {
-  //     const isDuplicate = existingWishList.some(
-  //       (element) => element.id === product.id
-  //     );
-  //     if (isDuplicate) return alert("No isDuplicates");
-
-  //     updatedList = [...existingWishList, product];
-  //   } else {
-  //     updatedList.push(product);
-  //   }
-  //   console.log(updatedList);
-
-  //   localStorage.setItem("wishlist", JSON.stringify(updatedList));
-  // };
 
   return (
     <>

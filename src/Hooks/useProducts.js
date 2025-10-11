@@ -9,7 +9,7 @@ const useProducts = () => {
   useEffect(() => {
     setLoading(true); //make sure that loading spinner is true until the data fetching
 
-    axios("../furniture.json")
+    axios("/furniture.json")
       .then((data) => setProducts(data.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));

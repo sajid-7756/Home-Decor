@@ -23,6 +23,7 @@ const setWishlist = (product) => {
 
 const removeWishlist = (product) => {
   const wishlist = getWishlist();
+  
   try {
     const updatedList = wishlist.filter((list) => list.id !== product.id);
     localStorage.setItem("wishlist", JSON.stringify(updatedList));
